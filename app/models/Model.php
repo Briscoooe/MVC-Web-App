@@ -59,8 +59,8 @@ class Model {
 		return ($this->usersDAO->insertNewUser ( $username, $hashedPassword ));
 	}
 
-	public function insertNewConcert($concertName, $concertVenue, $concertDate){
-		return ($this->concertsDAO->insertNewConcert ($concertName, $concertVenue, $concertDate));
+	public function insertNewConcert($concertName, $concertVenue, $concertDate, $uID){
+		return ($this->concertsDAO->insertNewConcert ($concertName, $concertVenue, $concertDate, $uID));
 	}
 
 	public function logoutUser() {

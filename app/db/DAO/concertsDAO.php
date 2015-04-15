@@ -5,9 +5,9 @@ class concertsDAO extends BaseDAO {
 		parent::BaseDAO($dbMng);
 	}
 	
-	public function insertNewConcert($concertName, $concertVenue, $concertDate) {
-		$sqlQuery = "INSERT INTO concerts (cname, cvenue, cdate) ";
-		$sqlQuery .= "VALUES ('$concertName', '$concertVenue', '$concertDate') ";
+	public function insertNewConcert($concertName, $concertVenue, $concertDate, $uID) {
+		$sqlQuery = "INSERT INTO concerts (cname, cvenue, cdate, uID) ";
+		$sqlQuery .= "VALUES ('$concertName', '$concertVenue', '$concertDate' , '$uID'); ";
 		$result = $this->getDbManager()->executeQuery($sqlQuery);
 		return $result;
 	}

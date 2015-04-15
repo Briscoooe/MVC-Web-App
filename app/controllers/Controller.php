@@ -62,9 +62,10 @@
 			$concertName = $parameters ["cName"];
 			$concertVenue = $parameters ["cVenue"];
 			$concertDate = $parameters ["cDate"];
+			$uID = $_SESSION ['user_id'];
 			
 			if (! empty ( $concertName ) && ! empty ( $concertVenue ) && ! empty ( $concertDate )) {					
-				$this->model->insertNewConcert ($concertName, $concertVenue, $concertDate);
+				$this->model->insertNewConcert ($concertName, $concertVenue, $concertDate, $uID);
 			}
 		}
 		
