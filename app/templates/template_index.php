@@ -4,14 +4,14 @@
 
 	<div class="container-fluid">
 		<div class="row-fluid" style="margin-top: 20px">
-			<div class="span6">
+			<div class="span4">
 				<h2><?php echo $introMessage; ?></h2>
 			</div>
-						<div class="span6" id="rcorners2">
-				<h2>Concerts you have attended</h2>
+			<div class="span4">
+				<h2></h2>
 				<?php echo $usersConcertslist;?>
 			</div>
-			<div class="span6"><?php echo $rightBox;?></div>
+			<div class="span4"><?php echo $rightBox;?></div>
 		</div>
 		<div class='navbar navbar-fixed-top navbar-inverse'>
 			<div class='navbar-inner'>

@@ -27,6 +27,16 @@ class authentication_factory {
 		
 		return (null);
 	}
+
+	# I created this function to store the user ID in the new concert entry
+	# as adding a varchar type username rather than int type ID would use
+	# a lot more database space in a large scale operation
+	public function getIDLoggedIn() {
+		if ($this->isUserLoggedIn ())
+			return $_SESSION ['user_id'];
+
+		return (null);
+	}
 	public function logoutUser() {
 		unset ( $_SESSION ['user_id'] );
 		unset ( $_SESSION ['username'] );

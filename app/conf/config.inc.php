@@ -27,6 +27,6 @@ define("LOGIN_USER_FORM_AUTHENTICATION_ERROR", "Error");
 define("LOGIN_USER_FORM_LOGOUT_STR", "Logout");
 
 /* misc */
-define("INDEX_INTRO_MESSAGE_STR", "Connect with friends and the world around you on " . APP_NAME);
+define("INDEX_INTRO_MESSAGE_STR", APP_NAME . ": The easiest way to track concerts");
 define("LOGGED_IN_USER_MENU", "<ul><li>option 1</li><li>option 2 </li></li>");
 ?>
