@@ -13,7 +13,7 @@
 				maxlength="50" required />
 		</p>
 		<p>
-			<label for="cDate">Date</label> <input type="text"
+			<label for="cDate">Date</label> <input type="date"
 				id="cDate" name="cDate" placeholder="Date"
 				maxlength="50" required />
 		</p>
