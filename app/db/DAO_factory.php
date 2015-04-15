@@ -38,6 +38,14 @@ class DAO_Factory {
 		return new usersDAO($this->getDbManager());
 	}
 
+	/**
+	 * return the reference of the Concerts DAO
+	 */
+	function getConcertsDAO() {
+		require_once("DAO/concertsDAO.php");
+		return new concertsDAO($this->getDbManager());
+	}
+
 }
 
 

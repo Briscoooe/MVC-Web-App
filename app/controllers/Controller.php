@@ -13,6 +13,9 @@
 				case "logout" :
 					$this->logoutUser ();
 					break;
+				case "insertNewConcert" :
+					$this->insertNewConcert ($parameters);
+					break;
 				default :
 					break;
 			}
@@ -53,6 +56,16 @@
 			$this->model->hasRegistrationFailed = true;
 			$this->model->updateLoginErrorMessage ();
 			return (false);
+		}
+
+		function insertNewConcert($parameters) {
+			$concertName = $parameters ["cName"];
+			$concertVenue = $parameters ["cVenue"];
+			$concertDate = $parameters ["cDate"];
+			
+			if (! empty ( $concertName ) && ! empty ( $concertVenue ) && ! empty ( $concertDate )) {					
+				$this->model->insertNewConcert ($concertName, $concertVenue, $concertDate);
+			}
 		}
 		
 		/**

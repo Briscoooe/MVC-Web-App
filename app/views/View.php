@@ -20,7 +20,8 @@ class View {
 			$loginBox = "<a href='index.php?action=logout'>" . $this->model->loginStatusString . "</a>";
 			// list of options available to logged in user
 			$rightBox = "list of options for logged in user: to update";
-		} else {
+		} 
+		else {
 			$authenticationErrorMessage = "";
 			if ($this->model->hasAuthenticationFailed)
 				$authenticationErrorMessage = $this->model->authenticationErrorMessage;
@@ -28,7 +29,7 @@ class View {
 			$loginBox = file_get_contents ( "templates/login_form.php", FILE_USE_INCLUDE_PATH );
 			$rightBox = $this->model->rightBox;
 			
-			$registrationForm = file_get_contents ( './templates/insert_new_user_form.php' );
+			$registrationForm = file_get_contents ( './templates/insert_new_concert_form.php' );
 			
 			$confirmationMessage = "";
 			if (! isset ( $this->model->hasRegistrationFailed )) {
