@@ -9,7 +9,7 @@ class Model {
 	public $appName = "", $introMessage = "", $loginStatusString = "", $rightBox = "", $signUpConfirmation=""; // strings
 	public $newUserErrorMessage = "", $authenticationErrorMessage = "";	//error messages
 	public $hasAuthenticationFailed = false, $hasRegistrationFailed=null; //control variables
-	public $usersConcerts=null;	
+	public $usersConcerts=null, $popularConcerts=null; //Cursor variables
 	
 	
 	public function __construct() {
@@ -67,6 +67,10 @@ class Model {
 	public function prepareUsersConcerts() {
 		$uID = $_SESSION ['user_id'];
 		$this->usersConcerts = $this->concertsDAO->getUsersConcerts($uID);
+	}
+
+	public function preparePopularConcerts() {
+		$this->popularConcerts = $this->concertsDAO->getPopularConcerts();
 	}
 
 	public function logoutUser() {

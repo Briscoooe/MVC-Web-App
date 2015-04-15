@@ -21,11 +21,12 @@ class View {
 			// list of options available to logged in user
 			$rightBox = file_get_contents("templates/insert_new_concert_form.php") ;
 			
-			$usersConcertslist = "";
+			$usersConcertslist = "<h2>Your Concerts</h2>";
 			foreach ($this->model->usersConcerts as $row)
-				$usersConcertslist .= "<li><strong>" . $row ["cname"] . "</strong></li>";
+				$usersConcertslist .= "<li><strong>" . $row ["cname"] . " @ " . $row["cvenue"] . "</strong></li>";
 			$usersConcertslist = "<ul>" . $usersConcertslist . "</ul>";
 		} 
+
 		else {
 			$authenticationErrorMessage = "";
 			if ($this->model->hasAuthenticationFailed)
@@ -33,6 +34,11 @@ class View {
 			
 			$loginBox = file_get_contents ( "templates/login_form.php", FILE_USE_INCLUDE_PATH );
 			$rightBox = $this->model->rightBox;
+
+			$popularConcertsList = "<h2>Popular Concerts<h2>";
+			foreach ($this->model->popularConcerts as $row)
+				$popularConcertsList .= "<h3><li><strong>" . $row ["cname"] . "</strong></li></h3>";
+			$popularConcertsList = "<ul>" . $popularConcertsList . "</ul>";
 			
 			$registrationForm = file_get_contents ( './templates/insert_new_user_form.php' );
 			

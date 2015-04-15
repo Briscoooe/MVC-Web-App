@@ -23,9 +23,10 @@
 					break;
 			}
 			
-			$this->model->prepareIntroMessage ();
 			$this->updateHeader ();
+			$this->model->prepareIntroMessage ();
 			$this->model->prepareUsersConcerts ();
+			$this->model->preparePopularConcerts ();
 		}
 		
 		/**
@@ -62,6 +63,14 @@
 			return (false);
 		}
 
+		/**
+		* Ensure that all fields have been filled and add the information in the fields
+		* to the concert table in the database
+		*
+		* @param : $parameters
+		* 			- An array containing the parameters to be added into the concert entry
+		*			- These are the name, venue, date and the ID of the user logged in
+		*/
 		function insertNewConcert($parameters) {
 			$concertName = $parameters ["cName"];
 			$concertVenue = $parameters ["cVenue"];
@@ -73,6 +82,9 @@
 			}
 		}
 
+		/**
+		* Get the list of concerts that the user who is logged in has entered into the database
+		*/
 		function getUsersConcerts() {
 			$uID = $_SESSION ['user_id'];
 			$this->model->getUsersConcerts($uID);
@@ -108,6 +120,7 @@
 			$this->model->hasAuthenticationFailed = true;
 			return;
 		}
+
 		function logoutUser() {
 			$this->model->logoutUser ();
 		}

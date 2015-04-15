@@ -10,6 +10,7 @@
 			<div class="span4">
 				<h2></h2>
 				<?php echo $usersConcertslist;?>
+				<?php echo $popularConcertsList;?>
 			</div>
 			<div class="span4"><?php echo $rightBox;?></div>
 		</div>

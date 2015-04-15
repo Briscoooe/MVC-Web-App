@@ -12,10 +12,12 @@ class concertsDAO extends BaseDAO {
 		return $result;
 	}
 
-	function getAllConcerts() {
+	function getPopularConcerts() {
 		$sqlQuery = "SELECT * ";
 		$sqlQuery .= "FROM concerts ";
-		$sqlQuery .= "ORDER BY cname; ";
+		$sqlQuery .= "GROUP BY cname ";
+		$sqlQuery .= "HAVING COUNT(cname) > 1 ";
+		$sqlQuery .= "ORDER BY COUNT(*) desc;";
 		
 		$result = $this->getDbManager ()->executeSelectQuery ( $sqlQuery );
 		
