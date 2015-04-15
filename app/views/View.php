@@ -20,6 +20,11 @@ class View {
 			$loginBox = "<a href='index.php?action=logout'>" . $this->model->loginStatusString . "</a>";
 			// list of options available to logged in user
 			$rightBox = file_get_contents("templates/insert_new_concert_form.php") ;
+			
+			$usersConcertslist = "";
+			foreach ($this->model->usersConcerts as $row)
+				$usersConcertslist .= "<li><strong>" . $row ["cname"] . "</strong></li>";
+			$usersConcertslist = "<ul>" . $usersConcertslist . "</ul>";
 		} 
 		else {
 			$authenticationErrorMessage = "";

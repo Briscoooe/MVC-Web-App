@@ -16,12 +16,16 @@
 				case "insertNewConcert" :
 					$this->insertNewConcert ($parameters);
 					break;
+				case "getUsersConcerts" :
+					$this->getUsersConcerts ();
+					break;
 				default :
 					break;
 			}
 			
 			$this->model->prepareIntroMessage ();
 			$this->updateHeader ();
+			$this->model->prepareUsersConcerts ();
 		}
 		
 		/**
@@ -67,6 +71,11 @@
 			if (! empty ( $concertName ) && ! empty ( $concertVenue ) && ! empty ( $concertDate )) {					
 				$this->model->insertNewConcert ($concertName, $concertVenue, $concertDate, $uID);
 			}
+		}
+
+		function getUsersConcerts() {
+			$uID = $_SESSION ['user_id'];
+			$this->model->getUsersConcerts($uID);
 		}
 		
 		/**

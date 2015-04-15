@@ -12,9 +12,20 @@ class concertsDAO extends BaseDAO {
 		return $result;
 	}
 
-	function getConcerts() {
+	function getAllConcerts() {
 		$sqlQuery = "SELECT * ";
 		$sqlQuery .= "FROM concerts ";
+		$sqlQuery .= "ORDER BY cname; ";
+		
+		$result = $this->getDbManager ()->executeSelectQuery ( $sqlQuery );
+		
+		return $result;
+	}
+
+	function getUsersConcerts($uID) {
+		$sqlQuery = "SELECT * ";
+		$sqlQuery .= "FROM concerts ";
+		$sqlQuery .= "WHERE uID = '$uID'";
 		$sqlQuery .= "ORDER BY cname; ";
 		
 		$result = $this->getDbManager ()->executeSelectQuery ( $sqlQuery );

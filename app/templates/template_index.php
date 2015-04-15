@@ -7,6 +7,10 @@
 			<div class="span6">
 				<h2><?php echo $introMessage; ?></h2>
 			</div>
+						<div class="span6" id="rcorners2">
+				<h2>Concerts you have attended</h2>
+				<?php echo $usersConcertslist;?>
+			</div>
 			<div class="span6"><?php echo $rightBox;?></div>
 		</div>
 		<div class='navbar navbar-fixed-top navbar-inverse'>
