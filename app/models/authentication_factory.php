@@ -19,6 +19,10 @@ class authentication_factory {
 		return ($this->concertsDAO->isConcertExisting($concertName, $concertVenue ,$concertDate));
 	}
 
+	public function hasUserAttended($concertName, $concertVenue, $concertDate, $uID){
+		return ($this->concertsDAO->hasUserAttended($concertName, $concertVenue, $concertDate, $uID));
+	}
+
 	public function getHashValue($string) {
 		return (hash ( "sha1", $string ));
 	}

@@ -5,13 +5,17 @@
 	<div class="container-fluid">
 		<div class="row-fluid" style="margin-top: 20px">
 			<div class="span4">
-				<h2><?php echo $introMessage; ?></h2>
+				<h2><?php echo $leftBox; ?></h2>
 			</div>
 			<div class="span4">
-				<h2></h2>
 				<?php echo $middleBox;?>
 			</div>
-			<div class="span4"><?php echo $rightBox;?></div>
+			<div class="span4">
+				<?php echo $rightBox;?>
+			</div>
+			<div style="float:right;clear:both;" class="span4">
+				<?php echo $bottomBox;?>
+			</div>
 		</div>
 		<div class='navbar navbar-fixed-top navbar-inverse'>
 			<div class='navbar-inner'>

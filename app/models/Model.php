@@ -42,7 +42,7 @@ class Model {
 		$this->newUserErrorMessage = "<div class='alert alert-error'>" . $errorString . "</div>";
 	}
 
-	public function concertExistsError($concertExistsString){
+	public function newConcertError($concertExistsString){
 		$this->newConcertErrorMessage = "<div class='alert alert-error'>" . $concertExistsString . "</div>";
 	}
 
@@ -70,6 +70,14 @@ class Model {
 
 	public function insertNewConcert($concertName, $concertVenue, $concertDate, $uID){
 		return ($this->concertsDAO->insertNewConcert ($concertName, $concertVenue, $concertDate, $uID));
+	}
+
+	public function getConcertInfo($CID) {
+		return ($this->concertsDAO->getConcertInfo($CID));
+	}
+
+	public function addToExistingConcert($CID, $concertName, $concertVenue, $concertDate, $uID){
+		return ($this->concertsDAO->addToExistingConcert($CID, $concertName, $concertVenue, $concertDate, $uID));
 	}
 
 	public function prepareUsersConcerts() {
