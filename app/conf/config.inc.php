@@ -18,6 +18,9 @@ define("NEW_USER_FORM_MAX_PASSWORD_LENGTH", 20);
 define("NEW_USER_FORM_REGISTRATION_CONFIRMATION_STR", "You have registered successfully");
 define("NEW_USER_FORM_SYSTEM_ERROR_STR", "Something went wrong during registration");
 
+/* new concert form constants */
+define("NEW_CONCERT_FORM_EXISTING_ERROR_STR", "This concert already exists in the database");
+define("NEW_CONCERT_FORM_REGISTRATION_CONFIRMATION_STR", "Concert Successfully added");
 
 /* login user form constants */
 define("LOGIN_USER_FORM_MAX_USERNAME_LENGTH", 30);	

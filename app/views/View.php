@@ -11,6 +11,7 @@ class View {
 		$appName = $this->model->appName;
 		$introMessage = $this->model->introMessage;
 		$newUserErrorMessage = $this->model->newUserErrorMessage;
+		$newConcertErrorMessage = $this->model->newConcertErrorMessage;
 		
 		$loginBox = "";
 		$authenticationErrorMessage = "";
@@ -19,12 +20,40 @@ class View {
 		if ($this->model->loginStatusString != null) {
 			$loginBox = "<a href='index.php?action=logout'>" . $this->model->loginStatusString . "</a>";
 			// list of options available to logged in user
-			$rightBox = file_get_contents("templates/insert_new_concert_form.php") ;
+			$addConcertForm = file_get_contents("templates/insert_new_concert_form.php") ;
+			$rightBox = $this->model->rightBox;
+
+
+			$confirmationMessage = "";
+			if (! isset ( $this->model->hasNewConcertFailed )) {
+				$rightBox = $addConcertForm;
+			} else if ($this->model->hasNewConcertFailed) {
+				$rightBox = $newConcertErrorMessage . $addConcertForm;
+			} else if ($this->model->hasNewConcertFailed == false) {
+				$confirmationMessage = "<div class='alert alert-success'>" . $this->model->newConcertConfirmation . "</div>";
+				$rightBox = $confirmationMessage . $addConcertForm;
+			}
 			
-			$usersConcertslist = "<h2>Your Concerts</h2>";
-			foreach ($this->model->usersConcerts as $row)
-				$usersConcertslist .= "<li><strong>" . $row ["cname"] . " @ " . $row["cvenue"] . "</strong></li>";
-			$usersConcertslist = "<ul>" . $usersConcertslist . "</ul>";
+			$usersConcertslist = "<h2>Your Concerts</h2>
+			<table class='table table-striped'>
+				<thead>
+					<tr>
+						<th>Artist Name</th>
+						<th>Venue</th>
+						<th>Date</th>
+						<th> </th>
+					</tr>
+				</thead>
+			<tbody>";
+			foreach ($this->model->usersConcerts as $row) {
+				$usersConcertslist .= "<tr><th>" . $row ["cname"] . "</th>";
+				$usersConcertslist .= "<th>" . $row["cvenue"] . "</th>";
+				$usersConcertslist .= "<th>" . $row["cdate"] . "</th>";
+				$usersConcertslist .= '<th>';
+			}
+
+			$usersConcertslist = $usersConcertslist . "</tbody></table>";
+			$middleBox = $usersConcertslist;
 		} 
 
 		else {
@@ -35,10 +64,25 @@ class View {
 			$loginBox = file_get_contents ( "templates/login_form.php", FILE_USE_INCLUDE_PATH );
 			$rightBox = $this->model->rightBox;
 
-			$popularConcertsList = "<h2>Popular Concerts<h2>";
-			foreach ($this->model->popularConcerts as $row)
-				$popularConcertsList .= "<h3><li><strong>" . $row ["cname"] . "</strong></li></h3>";
-			$popularConcertsList = "<ul>" . $popularConcertsList . "</ul>";
+			$popularConcertsList = "<h2>Popular Concerts</h2>
+			<table class='table table-striped'>
+				<thead>
+					<tr>
+						<th>Artist Name</th>
+						<th>Venue</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+			<tbody>";
+			foreach ($this->model->popularConcerts as $row) {
+				$popularConcertsList .= "<tr><th>" . $row ["cname"] . "</th>";
+				$popularConcertsList .= "<th>" . $row["cvenue"] . "</th>";
+				$popularConcertsList .= "<th>" . $row["cdate"] . "</th>";
+			}
+
+			$popularConcertsList = $popularConcertsList . "</tbody></table>";
+
+			$middleBox = $popularConcertsList;
 			
 			$registrationForm = file_get_contents ( './templates/insert_new_user_form.php' );
 			

@@ -77,9 +77,21 @@
 			$concertDate = $parameters ["cDate"];
 			$uID = $this->model->authenticationFactory->getIDLoggedIn();
 			
-			if (! empty ( $concertName ) && ! empty ( $concertVenue ) && ! empty ( $concertDate )) {					
-				$this->model->insertNewConcert ($concertName, $concertVenue, $concertDate, $uID);
-			}
+			if (! empty ( $concertName ) && ! empty ( $concertVenue ) && ! empty ( $concertDate ))
+				if (! $this->model->authenticationFactory->isConcertExisting ( $concertName, $concertVenue, $concertDate ))
+					if ($this->model->insertNewConcert($concertName, $concertVenue, $concertDate, $uID)){
+						$this->model->hasNewConcertFailed = false;
+						$this->model->setConcertConfirmationMessage();
+						return (true);
+					}
+				
+				else {
+					$this->model->concertExistsError(NEW_CONCERT_FORM_EXISTING_ERROR_STR);
+				}
+
+			$this->model->hasNewConcertFailed = true;
+			$this->model->setConcertConfirmationMessage ();
+			return (false);
 		}
 
 		/**
@@ -129,4 +141,4 @@
 				$this->model->updateLoginStatus ();
 		}	
 	}
-	?>
+?>

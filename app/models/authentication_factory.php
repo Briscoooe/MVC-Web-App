@@ -1,26 +1,37 @@
 <?php
 class authentication_factory {
-	private $usersDAO;
-	public function __construct($usersDAO) {
+	private $usersDAO, $concertsDAO;
+	public function __construct($usersDAO, $concertsDAO) {
 		$this->usersDAO = $usersDAO;
+		$this->concertsDAO = $concertsDAO;
 	}
+
 	public function isUserExisting($username) {
 		return ($this->usersDAO->isUserExisting ( $username ));
 	}
+
 	public function insertNewUser($username, $password) {
 		$hashedPassword = hash ( "sha1", $password );
 		return ($this->usersDAO->insertNewUser ( $username, $hashedPassword ));
 	}
+
+	public function isConcertExisting($concertName, $concertVenue, $concertDate){
+		return ($this->concertsDAO->isConcertExisting($concertName, $concertVenue ,$concertDate));
+	}
+
 	public function getHashValue($string) {
 		return (hash ( "sha1", $string ));
 	}
+
 	public function loginUser($userId, $username) {
 		$_SESSION ['user_id'] = $userId;
 		$_SESSION ['username'] = $username;
 	}
+
 	public function isUserLoggedIn() {
 		return (! empty ( $_SESSION ['user_id'] ));
 	}
+
 	public function getUsernameLoggedIn() {
 		if ($this->isUserLoggedIn ())
 			return $_SESSION ['username'];
