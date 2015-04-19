@@ -46,6 +46,7 @@ class Model {
 		$this->newConcertErrorMessage = "<div class='alert alert-error'>" . $concertExistsString . "</div>";
 	}
 
+
 	public function updateLoginStatus() {
 		$this->loginStatusString = LOGIN_USER_FORM_WELCOME_STR . " " . $this->authenticationFactory->getUsernameLoggedIn () . " | " . LOGIN_USER_FORM_LOGOUT_STR;
 		$this->authenticationErrorMessage = "";
@@ -72,8 +73,8 @@ class Model {
 		return ($this->concertsDAO->insertNewConcert ($concertName, $concertVenue, $concertDate, $uID));
 	}
 
-	public function getConcertInfo($CID) {
-		return ($this->concertsDAO->getConcertInfo($CID));
+	public function getConcertInfo($cID) {
+		return ($this->concertsDAO->getConcertInfo($cID));
 	}
 
 	public function addToExistingConcert($CID, $concertName, $concertVenue, $concertDate, $uID){

@@ -24,6 +24,7 @@ class DBManager {
 		}
 		return $rows;
 	}
+	
 	function executeQuery($query) {
 		mysqli_query ( $this->db_link, $query ) or die ( "Syntax error in SQL statement." . $this->db_link->error );
 		$numAffectedRows = mysqli_affected_rows ( $this->db_link );

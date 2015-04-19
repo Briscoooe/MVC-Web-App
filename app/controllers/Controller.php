@@ -20,7 +20,7 @@
 					$this->getUsersConcerts ();
 					break;
 				case "addToUserList" :
-					$this->addToUserList ();
+					$this->addToUserList ($parameters);
 					break;
 				default :
 					break;
@@ -102,27 +102,28 @@
 		}
 
 		function addToUserList($parameters) {
-			$concertID = $_SESSION ['addCID'];
+			$concertID = $parameters['cID'];
 			$concertInfo = $this->model->getConcertInfo($concertID);
 			
-			$concertName = $concertInfo ["cname"];
-			$concertVenue = $concertInfo ["cvenue"];
-			$concertDate = $concertInfo ["cdate"];
+			$concertName = $concertInfo["cname"];
+			$concertVenue = $concertInfo["cvenue"];
+			$concertDate = $concertInfo["cdate"];
 			$uID = $this->model->authenticationFactory->getIDLoggedIn();
-			
+			#header('Location: http://www.' . $concertInfo["cname"] . '.com');
 
-			#if (! $this->model->authenticationFactory->hasUserAttended ( $concertName, $concertVenue, $concertDate, $uID)){
-				$this->model-addToExistingConcert($concertID, $concertDate, $concertVenue, $concertDate, $uID);
+			if (! $this->model->authenticationFactory->hasUserAttended ( $concertName, $concertVenue, $concertDate, $uID)) {
+				$this->model->addToExistingConcert($concertID, $concertDate, $concertVenue, $concertDate, $uID);
 				#$this->model->hasNewConcertFailed = false;
 				#$this->model->setConcertConfirmationMessage();
-				#return (true);
-			#} else {
-				#$this->model->newConcertError(NEW_CONCERT_FORM_ALREADY_ATTENDED_ERROR_STR);
-			#}
+				$this->model->newConcertError("Added");
+				return (true);
+			} else {
+				$this->model->newConcertError(NEW_CONCERT_FORM_ALREADY_ATTENDED_ERROR_STR);
+			}
 
-			#$this->model->hasNewConcertFailed = true;
-			#$this->model->setConcertConfirmationMessage ();
-			#return (false);
+			$this->model->hasNewConcertFailed = true;
+			$this->model->setConcertConfirmationMessage ();
+			return (false);
 		}
 
 		/**

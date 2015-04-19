@@ -58,25 +58,32 @@ class concertsDAO extends BaseDAO {
 		return $result;
 	}
 
-	function getConcertInfo($CID){
+	function getConcertInfo($cID){
 		$sqlQuery = "SELECT * ";
 		$sqlQuery .= "FROM concerts ";
-		$sqlQuery .= "WHERE concertID = '$CID';";
-
-		$result = $this->getDbManager ()->executeSelectQuery( $sqlQuery );
-
-		return $result;
-	}
-
-	function addToExistingConcert($CID, $concertName, $concertVenue, $concertDate, $uID){
-		$sqlQuery = "INSERT INTO concerts ";
-		$sqlQuery .= "(cID, cname, cvenue, cdate, uID) VALUES ";
-		$sqlQuery .= "('$CID', $concertName', '$concertVenue', '$concertDate', '$uID');";
-
-		$result = $this->getDbManager ()->executeSelectQuery( $sqlQuery );
+		$sqlQuery .= "WHERE concertID = '$cID';";
+		$result = $this->getDbManager ()->executeSelectQuery ( $sqlQuery );
 		
 		return $result;
 	}
+
+	function addToExistingConcert($CID, $concertName, $concertVenue, $concertDate, $UID){
+		$sqlQuery = "INSERT INTO concerts ";
+		$sqlQuery .= "(concertID, cname, cvenue, cdate, uID) VALUES";
+		$sqlQuery .= "('$CID', '$concertName', '$concertVenue', '$concertDate', '$UID');";
+
+		$result = $this->getDbManager ()->executeQuery( $sqlQuery );
+
+		return $result;
+	}
+
+	/*
+
+	remove concert from users list
+	1. delete * from concerts where cID = x AND uID = y
+
+	executeQuery NOT executeSelectQuery
+	*/
 
 }
 ?>

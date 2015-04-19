@@ -21,14 +21,24 @@ class View {
 			$popularConcertsList = "<h2>Popular Concerts</h2>";
 			$tableBeginning = file_get_contents("templates/table_beginning.php");
 			$popularConcertsList .= $tableBeginning;
-
+			
+			/*
 			foreach ($this->model->popularConcerts as $row) {
-				$popularConcertsList .= "<form method='post' action='index.php'><tr><th>" . $row ["cname"] . "</th>";
+				$popularConcertsList .= "<form method='post' action='index.php'><input id='action' type='hidden' value='addToUserList'/><tr><th>" . $row ["cname"] . "</th>";
 				$popularConcertsList .= "<th>" . $row["cvenue"] . "</th>";
 				$popularConcertsList .= "<th>" . $row["cdate"] . "</th>";
-				$popularConcertsList .= "<th><input id='action' type='hidden' value='addToUserList'/>";
-				$popularConcertsList .=	"<input type='hidden' id='addCID' name='addCID' value='" . $_row["concertID"] . "'/>";
+				$popularConcertsList .=	"<th><input type='text' id='addCID' name='addCID'/>";
 				$popularConcertsList .= "<button type='submit' class='btn btn-primary'>Add</button></th></form>";
+			}*/
+
+			foreach ($this->model->popularConcerts as $row) {
+				$popularConcertsList .= "<tr><form action='index.php' method='post'>";
+				$popularConcertsList .= "<input id='action' type='hidden' name='action' value='addToUserList'/>";
+				$popularConcertsList .= "<th>" . $row ["cname"] . "</th>";
+				$popularConcertsList .= "<th>" . $row["cvenue"] . "</th>";
+				$popularConcertsList .= "<th>" . $row["cdate"] . "</th>";
+				$popularConcertsList .= "<th><input type='hidden' id='cID' name='cID' value='" . $row["concertID"] . "'/></th>";
+				$popularConcertsList .= "<th><input type='submit' value='Add' class='btn btn-primary'/></th></form>";
 			}
 
 			$popularConcertsList = $popularConcertsList . "</tbody></table>";
