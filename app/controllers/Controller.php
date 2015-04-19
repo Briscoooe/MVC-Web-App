@@ -103,16 +103,11 @@
 
 		function addToUserList($parameters) {
 			$concertID = $parameters['cID'];
-			$concertInfo = $this->model->getConcertInfo($concertID);
-			
-			$concertName = $concertInfo["cname"];
-			$concertVenue = $concertInfo["cvenue"];
-			$concertDate = $concertInfo["cdate"];
+			#header('Location: http://www.' . $concertID . '.com/');
 			$uID = $this->model->authenticationFactory->getIDLoggedIn();
-			#header('Location: http://www.' . $concertInfo["cname"] . '.com');
 
-			if (! $this->model->authenticationFactory->hasUserAttended ( $concertName, $concertVenue, $concertDate, $uID)) {
-				$this->model->addToExistingConcert($concertID, $concertDate, $concertVenue, $concertDate, $uID);
+			if (! $this->model->authenticationFactory->hasUserAttended($uID, $concertID)) {
+				$this->model->addToExistingConcert($uID, $concertID);
 				#$this->model->hasNewConcertFailed = false;
 				#$this->model->setConcertConfirmationMessage();
 				$this->model->newConcertError("Added");
@@ -121,8 +116,8 @@
 				$this->model->newConcertError(NEW_CONCERT_FORM_ALREADY_ATTENDED_ERROR_STR);
 			}
 
-			$this->model->hasNewConcertFailed = true;
-			$this->model->setConcertConfirmationMessage ();
+			#$this->model->hasNewConcertFailed = true;
+			#$this->model->setConcertConfirmationMessage ();
 			return (false);
 		}
 

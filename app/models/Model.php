@@ -77,12 +77,12 @@ class Model {
 		return ($this->concertsDAO->getConcertInfo($cID));
 	}
 
-	public function addToExistingConcert($CID, $concertName, $concertVenue, $concertDate, $uID){
-		return ($this->concertsDAO->addToExistingConcert($CID, $concertName, $concertVenue, $concertDate, $uID));
+	public function addToExistingConcert($uID, $cID){
+		return ($this->concertsDAO->addToExistingConcert($uID, $cID));
 	}
 
 	public function prepareUsersConcerts() {
-		$uID = $_SESSION ['user_id'];
+		$uID = $this->authenticationFactory->getIDLoggedIn();
 		$this->usersConcerts = $this->concertsDAO->getUsersConcerts($uID);
 	}
 
