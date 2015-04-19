@@ -13,7 +13,7 @@
 			<div class="span4">
 				<?php echo $rightBox;?>
 			</div>
-			<div style="float:right;clear:both;" class="span4">
+			<div style="float:right;" class="span4">
 				<?php echo $bottomBox;?>
 			</div>
 		</div>

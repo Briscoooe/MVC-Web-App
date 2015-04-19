@@ -108,16 +108,16 @@
 
 			if (! $this->model->authenticationFactory->hasUserAttended($uID, $concertID)) {
 				$this->model->addToExistingConcert($uID, $concertID);
-				#$this->model->hasNewConcertFailed = false;
-				#$this->model->setConcertConfirmationMessage();
+				$this->model->hasNewConcertFailed = false;
+				$this->model->setConcertConfirmationMessage();
 				$this->model->newConcertError("Added");
 				return (true);
 			} else {
 				$this->model->newConcertError(NEW_CONCERT_FORM_ALREADY_ATTENDED_ERROR_STR);
 			}
 
-			#$this->model->hasNewConcertFailed = true;
-			#$this->model->setConcertConfirmationMessage ();
+			$this->model->hasNewConcertFailed = true;
+			$this->model->setConcertConfirmationMessage ();
 			return (false);
 		}
 

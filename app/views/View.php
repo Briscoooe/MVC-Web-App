@@ -50,7 +50,8 @@ class View {
 			$addConcertForm = file_get_contents("templates/insert_new_concert_form.php") ;
 			$rightBox = $this->model->rightBox;
 
-			$bottomBox = "<h2>Add an existing concert to your list</h2>";
+			$bottomBox = "<h4>Once created, the concert will appear on the left hand list. Click 'Add' beside it to add
+			it to your list.</h4>";
 
 
 			$confirmationMessage = "";
