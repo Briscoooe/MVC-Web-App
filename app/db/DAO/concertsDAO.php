@@ -38,8 +38,7 @@ class concertsDAO extends BaseDAO {
 
 	function getPopularConcerts() {
 		$sqlQuery = "SELECT * ";
-		$sqlQuery .= "FROM concerts ";
-		$sqlQuery .= "GROUP BY cname;";
+		$sqlQuery .= "FROM concerts; ";
 		
 		$result = $this->getDbManager ()->executeSelectQuery ( $sqlQuery );
 		

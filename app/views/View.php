@@ -21,15 +21,6 @@ class View {
 			$popularConcertsList = "<h2>Popular Concerts</h2>";
 			$tableBeginning = file_get_contents("templates/table_beginning.php");
 			$popularConcertsList .= $tableBeginning;
-			
-			/*
-			foreach ($this->model->popularConcerts as $row) {
-				$popularConcertsList .= "<form method='post' action='index.php'><input id='action' type='hidden' value='addToUserList'/><tr><th>" . $row ["cname"] . "</th>";
-				$popularConcertsList .= "<th>" . $row["cvenue"] . "</th>";
-				$popularConcertsList .= "<th>" . $row["cdate"] . "</th>";
-				$popularConcertsList .=	"<th><input type='text' id='addCID' name='addCID'/>";
-				$popularConcertsList .= "<button type='submit' class='btn btn-primary'>Add</button></th></form>";
-			}*/
 
 			foreach ($this->model->popularConcerts as $row) {
 				$popularConcertsList .= "<tr><form action='index.php' method='post'>";
@@ -69,13 +60,28 @@ class View {
 			$usersConcertslist .= $tableBeginning;
 
 			foreach ($this->model->usersConcerts as $row) {
-				$usersConcertslist .= "<tr><th>" . $row ["cname"] . "</th>";
+				$usersConcertslist .= "<tr><form action='index.php' method='post'>";
+				$usersConcertslist .= "<input id='action' type='hidden' name='action' value='editConcert'/>";
+				$usersConcertslist .= "<th>" . $row ["cname"] . "</th>";
 				$usersConcertslist .= "<th>" . $row["cvenue"] . "</th>";
 				$usersConcertslist .= "<th>" . $row["cdate"] . "</th>";
+				$usersConcertslist .= "<th><input type='hidden' id='cID' name='cID' value='" . $row["concertID"] . "'/></th>";
+				$usersConcertslist .= "<th><input type='submit' value='Edit' class='btn btn-info'/></th></form>";
 			}
 
 			$usersConcertslist = $usersConcertslist . "</tbody></table>";
 			$middleBox = $usersConcertslist;
+
+			
+			if (! isset ( $this->model->editButtonPressed )) {
+				$middleBox = $usersConcertslist;
+			} else if ($this->model->editButtonPressed) {
+				$middleBox = $newConcertErrorMessage . $usersConcertslist;
+			} else if ($this->model->editButtonPressed == false) {
+				$confirmationMessage = "<div class='alert alert-success'>" . $this->model->editConcertConfirmation . "</div>";
+				$middleBox = $confirmationMessage . $usersConcertslist;
+			}
+			
 		} 
 
 		else {

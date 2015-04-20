@@ -22,6 +22,9 @@
 				case "addToUserList" :
 					$this->addToUserList ($parameters);
 					break;
+				case "editConcert" :
+					$this->editConcert ($parameters);
+					break;
 				default :
 					break;
 			}
@@ -103,14 +106,12 @@
 
 		function addToUserList($parameters) {
 			$concertID = $parameters['cID'];
-			#header('Location: http://www.' . $concertID . '.com/');
 			$uID = $this->model->authenticationFactory->getIDLoggedIn();
 
 			if (! $this->model->authenticationFactory->hasUserAttended($uID, $concertID)) {
 				$this->model->addToExistingConcert($uID, $concertID);
 				$this->model->hasNewConcertFailed = false;
 				$this->model->setConcertConfirmationMessage();
-				$this->model->newConcertError("Added");
 				return (true);
 			} else {
 				$this->model->newConcertError(NEW_CONCERT_FORM_ALREADY_ATTENDED_ERROR_STR);
@@ -158,6 +159,10 @@
 			$this->model->updateLoginErrorMessage ();
 			$this->model->hasAuthenticationFailed = true;
 			return;
+		}
+
+		function editConcert() {
+			$this->model->editButtonPressed = true;
 		}
 
 		function logoutUser() {
