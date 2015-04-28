@@ -81,7 +81,7 @@ class View {
 				$cID = $_POST['cID'];
 				$cName = $_POST['cname'];
 				$cVenue = $_POST['cvenue'];
-				$cDate = $POST['cdate'];
+				$cDate = $_POST['cdate'];
 				$editConcertForm = '<h2>Edit a concert</h2>
 				<form action="index.php" method="post">
 					<fieldset>
@@ -96,7 +96,7 @@ class View {
 						</p>
 						<p>
 							<label for="cDate">Date</label> 
-							<input type="date"id="cDate" name="cDate" placeholder="Date" maxlength="50" value="' . $cDate . '" required />
+							<input type="date" id="cDate" name="cDate" value="' . $cDate . '" required />
 						</p>
 							<input type="hidden" id="cID" name="cID" value="' . $cID . '"/>
 						<p>
