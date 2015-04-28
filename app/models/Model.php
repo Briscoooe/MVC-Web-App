@@ -9,7 +9,7 @@ class Model {
 	public $appName = "", $introMessage = "", $loginStatusString = "", $rightBox = "", $signUpConfirmation="", $newConcertConfirmation=""; // strings
 	public $newUserErrorMessage = "", $authenticationErrorMessage = "", $newConcertErrorMessage = "";	//error messages
 	public $hasAuthenticationFailed = false, $hasRegistrationFailed=null, $hasNewConcertFailed=null, $editButtonPressed=null; //control variables
-	public $usersConcerts=null, $popularConcerts=null; //Cursor variables
+	public $usersConcerts=null, $popularConcerts=null, $concertInfo=null; //Cursor variables
 	
 	
 	public function __construct() {
@@ -68,6 +68,10 @@ class Model {
 		$this->editConcertConfirmation = EDIT_CONCERT_CONFIRMATION_STR;
 	}
 
+	public function getConcertInfo($CID){
+		return ($this->concertsDAO->getConcertInfo($CID));
+	}
+
 	public function insertNewUser($username, $hashedPassword) {
 		return ($this->usersDAO->insertNewUser ( $username, $hashedPassword ));
 	}
@@ -76,8 +80,8 @@ class Model {
 		return ($this->concertsDAO->insertNewConcert ($concertName, $concertVenue, $concertDate, $uID));
 	}
 
-	public function getConcertInfo($cID) {
-		return ($this->concertsDAO->getConcertInfo($cID));
+	public function editConcert($concertName, $concertVenue, $concertDate ,$CID ) {
+		return ($this->concertsDAO->editConcert($concertName, $concertVenue, $concertDate ,$CID ));
 	}
 
 	public function addToExistingConcert($uID, $cID){
@@ -87,6 +91,10 @@ class Model {
 	public function prepareUsersConcerts() {
 		$uID = $this->authenticationFactory->getIDLoggedIn();
 		$this->usersConcerts = $this->concertsDAO->getUsersConcerts($uID);
+	}
+
+	public function prepareConcertInfo($cID) {
+		$this->concertInfo = $this->concertsDAO->getConcertInfo($cID);
 	}
 
 	public function preparePopularConcerts() {

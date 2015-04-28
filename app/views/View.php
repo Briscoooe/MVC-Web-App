@@ -61,22 +61,51 @@ class View {
 
 			foreach ($this->model->usersConcerts as $row) {
 				$usersConcertslist .= "<tr><form action='index.php' method='post'>";
-				$usersConcertslist .= "<input id='action' type='hidden' name='action' value='editConcert'/>";
+				$usersConcertslist .= "<input id='action' type='hidden' name='action' value='pressButton'/>";
 				$usersConcertslist .= "<th>" . $row ["cname"] . "</th>";
 				$usersConcertslist .= "<th>" . $row["cvenue"] . "</th>";
 				$usersConcertslist .= "<th>" . $row["cdate"] . "</th>";
 				$usersConcertslist .= "<th><input type='hidden' id='cID' name='cID' value='" . $row["concertID"] . "'/></th>";
-				$usersConcertslist .= "<th><input type='submit' value='Edit' class='btn btn-info'/></th></form>";
+				$usersConcertslist .= "<th><input type='submit' value='Edit' class='btn btn-info' name='editConcert' /></th></form>";
 			}
 
 			$usersConcertslist = $usersConcertslist . "</tbody></table>";
 			$middleBox = $usersConcertslist;
 
-			
 			if (! isset ( $this->model->editButtonPressed )) {
 				$middleBox = $usersConcertslist;
 			} else if ($this->model->editButtonPressed) {
-				$middleBox = $newConcertErrorMessage . $usersConcertslist;
+				$cID = null;
+				$cID = $_POST['cID'];
+				foreach ($this->model->usersConcerts as $row) {
+					$editConcertForm = '<h2>Edit a concert</h2>
+					<form action="index.php" method="post">
+						<fieldset>
+							<input id="action" type="hidden" name="action" value="editConcert" />
+							<p>
+								<label for="cName">Artist Name</label> 
+								<input type="text" id="cName" name="cName" placeholder="Artist Name" maxlength="50" value="' . $row["cname"] . '"" required />
+							</p>
+							<p>
+								<label for="cVenue">Venue</label> 
+								<input type="text" id="cVenue" name="cVenue" placeholder="Venue" maxlength="50" value="' . $row["cvenue"] . '"" required />
+							</p>
+							<p>
+								<label for="cDate">Date</label> 
+								<input type="date"id="cDate" name="cDate" placeholder="Date" maxlength="50" value="' . $row["cdate"] . '"" required />
+							</p>
+							<input type="hidden" id="cID" name="cID" value="' . $row['concertID'] . '"/>
+							<p>
+							<div class="form-group">
+								<div class="controls">
+									<button type="submit" class="btn btn-success">Done editing</button>
+								</div>
+							</div>
+							</p>
+						</fieldset>
+					</form>';
+				}
+				$middleBox = $newConcertErrorMessage . $editConcertForm;
 			} else if ($this->model->editButtonPressed == false) {
 				$confirmationMessage = "<div class='alert alert-success'>" . $this->model->editConcertConfirmation . "</div>";
 				$middleBox = $confirmationMessage . $usersConcertslist;

@@ -76,6 +76,16 @@ class concertsDAO extends BaseDAO {
 		$result = $this->getDbManager ()->executeQuery( $sqlQuery );
 
 		return $result;
+	} 
+
+	function editConcert($concertName, $concertVenue, $concertDate, $cID){
+		$sqlQuery = "UPDATE concerts ";
+		$sqlQuery .= "SET cname='$concertName', cvenue='$concertVenue', cdate='$concertDate' ";
+		$sqlQuery .= "WHERE concertID='$cID';";
+
+		$result = $this->getDbManager ()->executeQuery( $sqlQuery );
+
+		return $result;
 	}
 
 	/*

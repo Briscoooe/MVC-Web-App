@@ -22,8 +22,14 @@
 				case "addToUserList" :
 					$this->addToUserList ($parameters);
 					break;
+				case "getConcertInfo" :
+					$this->getConcertInfo ($parameters);
+					break;
 				case "editConcert" :
 					$this->editConcert ($parameters);
+					break;
+				case "pressButton" :
+					$this->pressButton ();
 					break;
 				default :
 					break;
@@ -161,8 +167,22 @@
 			return;
 		}
 
-		function editConcert() {
+		function getConcertInfo($parameters){
+			$this->model->getConcertInfo($CID);
+		}
+
+		function pressButton(){
 			$this->model->editButtonPressed = true;
+		}
+
+		function editConcert($parameters) {
+			$concertName = $parameters["cName"];
+			$concertVenue = $parameters["cVenue"];
+			$concertDate = $parameters["cDate"];
+			$CID = $parameters["cID"];
+
+			$this->model->editConcert($concertName, $concertVenue, $concertDate , $CID);
+			$this->model->editButtonPressed = false;
 		}
 
 		function logoutUser() {
