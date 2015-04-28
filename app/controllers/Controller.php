@@ -31,6 +31,9 @@
 				case "pressButton" :
 					$this->pressButton ();
 					break;
+				case "removeFromList" :
+					$this->removeFromList ($parameters);
+					break;
 				default :
 					break;
 			}
@@ -39,6 +42,7 @@
 			$this->model->prepareIntroMessage ();
 			$this->model->prepareUsersConcerts ();
 			$this->model->preparePopularConcerts ();
+			$this->model->setEditConcertConfirmationMessage();
 		}
 		
 		/**
@@ -129,7 +133,7 @@
 		}
 
 		/**
-		* Get the list of concerts that the user who is logged in has entered into the database
+		* Get the list of concerts that the user who is logged has attended
 		*/
 		function getUsersConcerts() {
 			$uID = $_SESSION ['user_id'];
@@ -167,12 +171,15 @@
 			return;
 		}
 
-		function getConcertInfo($parameters){
-			$this->model->getConcertInfo($CID);
-		}
-
 		function pressButton(){
 			$this->model->editButtonPressed = true;
+		}
+
+		function removeFromList($parameters) {
+			$cID = $parameters['cID'];
+			$uID = $this->model->authenticationFactory->getIDLoggedIn();
+			$this->model->removeFromList($uID, $cID);
+			$this->model->editButtonPressed = false;
 		}
 
 		function editConcert($parameters) {

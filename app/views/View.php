@@ -107,8 +107,13 @@ class View {
 						</div>
 						</p>
 					</fieldset>
+				</form>
+				<form action="index.php" method="post">
+					<input id="action" type="hidden" name="action" value="removeFromList" />
+					<input type="hidden" id="cID" name="cID" value="' . $cID . '"/>
+					<button type="submit" class="btn btn-danger">Delete from my list</button>
 				</form>';
-				$middleBox = $newConcertErrorMessage . $editConcertForm;
+				$middleBox = $editConcertForm;
 			} else if ($this->model->editButtonPressed == false) {
 				$confirmationMessage = "<div class='alert alert-success'>" . $this->model->editConcertConfirmation . "</div>";
 				$middleBox = $confirmationMessage . $usersConcertslist;

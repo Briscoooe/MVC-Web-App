@@ -6,7 +6,7 @@ include_once 'authentication_factory.php';
 class Model {
 	public $DAO_Factory, $validationFactory, $authenticationFactory; // factories
 	private $usersDAO, $concertsDAO; // DAOs
-	public $appName = "", $introMessage = "", $loginStatusString = "", $rightBox = "", $signUpConfirmation="", $newConcertConfirmation=""; // strings
+	public $appName = "", $introMessage = "", $loginStatusString = "", $rightBox = "", $signUpConfirmation="", $newConcertConfirmation="", $editConcertConfirmation=""; // strings
 	public $newUserErrorMessage = "", $authenticationErrorMessage = "", $newConcertErrorMessage = "";	//error messages
 	public $hasAuthenticationFailed = false, $hasRegistrationFailed=null, $hasNewConcertFailed=null, $editButtonPressed=null; //control variables
 	public $usersConcerts=null, $popularConcerts=null, $concertInfo=null; //Cursor variables
@@ -95,6 +95,10 @@ class Model {
 
 	public function prepareConcertInfo($cID) {
 		$this->concertInfo = $this->concertsDAO->getConcertInfo($cID);
+	}
+
+	public function removeFromList($uID, $cID) {
+		return ($this->concertsDAO->removeFromList($uID, $cID));
 	}
 
 	public function preparePopularConcerts() {

@@ -88,6 +88,16 @@ class concertsDAO extends BaseDAO {
 		return $result;
 	}
 
+	function removeFromList($uID, $cID) {
+		$sqlQuery = "DELETE FROM concertsAttended ";
+		$sqlQuery .= "WHERE uID = '$uID' ";
+		$sqlQuery .= "AND concertID = '$cID'";
+
+		$result = $this->getDbManager ()->executeQuery ($sqlQuery);
+
+		return $result;
+	}
+
 	/*
 
 	remove concert from users list
