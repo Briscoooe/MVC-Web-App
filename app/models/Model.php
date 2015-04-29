@@ -80,6 +80,10 @@ class Model {
 		return ($this->concertsDAO->getConcertInfo($CID));
 	}
 
+	public function deleteConcert($cID){
+		return ($this->concertsDAO->deleteConcert($cID));
+	}
+
 	public function insertNewUser($username, $hashedPassword) {
 		return ($this->usersDAO->insertNewUser ( $username, $hashedPassword ));
 	}

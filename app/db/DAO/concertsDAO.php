@@ -68,6 +68,14 @@ class concertsDAO extends BaseDAO {
 		return $result;
 	}
 
+	function deleteConcert($cID){
+		$sqlQuery = "DELETE FROM concerts ";
+		$sqlQuery .= "WHERE concertID = '$cID';";
+		$result = $this->getDbManager ()->executeQuery ($sqlQuery);
+
+		return $result;
+	}
+
 	function addToExistingConcert($uID, $cID) {
 		$sqlQuery = "INSERT INTO concertsAttended ";
 		$sqlQuery .= "(uID, concertID) VALUES ";

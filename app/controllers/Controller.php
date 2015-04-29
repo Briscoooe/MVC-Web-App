@@ -22,8 +22,8 @@
 				case "addToUserList" :
 					$this->addToUserList ($parameters);
 					break;
-				case "getConcertInfo" :
-					$this->getConcertInfo ($parameters);
+				case "deleteConcert" :
+					$this->deleteConcert ($parameters);
 					break;
 				case "editConcert" :
 					$this->editConcert ($parameters);
@@ -240,6 +240,11 @@
 			$this->model->editButtonPressed = false;
 			$this->model->setEditConcertConfirmationMessage ();
 			return (false);
+		}
+
+		function deleteConcert($parameters) {
+			$cID = $parameters["cID"];
+			$this->model->deleteConcert($cID);
 		}
 
 		/**

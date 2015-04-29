@@ -30,7 +30,12 @@ class View {
 				$popularConcertsList .= "<th>" . $row["cvenue"] . "</th>";
 				$popularConcertsList .= "<th>" . $row["cdate"] . "</th>";
 				$popularConcertsList .= "<th><input type='hidden' id='cID' name='cID' value='" . $row["concertID"] . "'/></th>";
-				$popularConcertsList .= "<th><input type='submit' value='Add' class='btn btn-primary'/></th></form>";
+				$popularConcertsList .= "<th><input type='submit' value='Add' class='btn btn-primary'/></form>";
+				$popularConcertsList .= '<form action="index.php" method="post">
+											<input id="action" type="hidden" name="action" value="deleteConcert" />
+											<input type="hidden" id="cID" name="cID" value="' . $row["concertID"] . '"/>
+											<button type="submit" class="btn btn-danger">Delete</button>
+										</form></th>';
 			}
 
 			$popularConcertsList = $popularConcertsList . "</tbody></table>";
