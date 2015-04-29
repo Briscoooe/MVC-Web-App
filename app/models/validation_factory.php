@@ -20,5 +20,18 @@ class validation_factory {
 			if (strlen($string)<=$maxchars) return (true);	
 		return (false);
 	}
+
+	public function isDateValid($cDate) {
+		$cDate = explode('-', $cDate);
+		$month = $cDate[0];
+		$day   = $cDate[1];
+		$year  = $cDate[2];
+		$regex = "/(?:(?:19|20)[0-9]{2})/";
+		if (preg_match($regex, $month)) {
+		    return (true);
+		} else {
+			return (false);
+		}
+	}
 }
 ?>
