@@ -23,6 +23,7 @@ define("NEW_CONCERT_FORM_EXISTING_ERROR_STR", "This concert already exists in th
 define("NEW_CONCERT_FORM_REGISTRATION_CONFIRMATION_STR", "Concert Successfully added");
 define("NEW_CONCERT_FORM_ALREADY_ATTENDED_ERROR_STR", "This concert is already on your list of concerts");
 define("EDIT_CONCERT_CONFIRMATION_STR", "Concert edited");
+define("EDIT_CONCERT_REMOVE_CONFIRMATION_STR", "Concert removed from your list");
 define("CONCERT_NAME_MAX_LENGTH", 50);
 define("CONCERT_VENUE_MAX_LENGTH", 50);
 

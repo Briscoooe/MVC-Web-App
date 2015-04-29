@@ -203,6 +203,9 @@
 			$uID = $this->model->authenticationFactory->getIDLoggedIn();
 			$this->model->removeFromList($uID, $cID);
 			$this->model->editButtonPressed = false;
+			$this->model->hasEditConcertFailed = false;
+			$this->model->removedFromList = true;
+			$this->model->setRemoveConcertConfirmationMessage();
 		}
 
 		/**

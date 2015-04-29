@@ -121,15 +121,20 @@ class View {
 				} else if ($this->model->hasEditConcertFailed == false){
 					$middleBox = $editConcertForm;
 				}
-				
+
 			} else if ($this->model->editButtonPressed == false) {
 				if (! isset ( $this->model->hasEditConcertFailed )) {
 					$middleBox = $editConcertForm;
 				} else if ($this->model->hasEditConcertFailed) {
 					$middleBox = $editConcertErrorMessage . $usersConcertslist;
 				} else if ($this->model->hasEditConcertFailed == false){
-					$confirmationMessage = "<div class='alert alert-success'>" . $this->model->editConcertConfirmation . "</div>";
-					$middleBox = $confirmationMessage . $usersConcertslist;
+					if (! isset ($this->model->removedFromList)){
+						$confirmationMessage = "<div class='alert alert-success'>" . $this->model->editConcertConfirmation . "</div>";
+						$middleBox = $confirmationMessage . $usersConcertslist;
+					} else if ($this->model->removedFromList) {
+						$confirmationMessage = "<div class='alert alert-success'>" . $this->model->removeConcertConfirmation . "</div>";
+						$middleBox = $confirmationMessage . $usersConcertslist;
+					}
 				}
 			}
 			

@@ -12,7 +12,7 @@
 		</p>
 		<p>
 			<label for="cDate">Date</label> 
-			<input type="date"id="cDate" name="cDate" placeholder="Date" maxlength="50" required />
+			<input type="date"id="cDate" name="cDate" required />
 		</p>
 		
 		<p>
