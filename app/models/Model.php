@@ -8,7 +8,7 @@ class Model {
 	private $usersDAO, $concertsDAO; // DAOs
 	public $appName = "", $introMessage = "", $loginStatusString = "", $rightBox = "", $signUpConfirmation="", $newConcertConfirmation="", $editConcertConfirmation=""; // strings
 	public $newUserErrorMessage = "", $authenticationErrorMessage = "", $newConcertErrorMessage = "", $editConcertErrorMessage="";	//error messages
-	public $hasAuthenticationFailed = false, $hasRegistrationFailed=null, $hasNewConcertFailed=null, $editButtonPressed=null, $hasEditFailed=null; //control variables
+	public $hasAuthenticationFailed = false, $hasRegistrationFailed=null, $hasNewConcertFailed=null, $editButtonPressed=null, $hasEditConcertFailed=null; //control variables
 	public $usersConcerts=null, $popularConcerts=null, $concertInfo=null; //Cursor variables
 	
 	
@@ -47,7 +47,7 @@ class Model {
 	}
 
 	public function editConcertError($editConcertErrorMessage) {
-		$this->newConcertErrorMessage = "<div class='alert alert-error'>" . $editConcertErrorMessage . "</div>";
+		$this->editConcertErrorMessage = "<div class='alert alert-error'>" . $editConcertErrorMessage . "</div>";
 	}
 
 	public function updateLoginStatus() {

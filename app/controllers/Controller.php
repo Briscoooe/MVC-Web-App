@@ -131,7 +131,7 @@
 
 			if (! $this->model->authenticationFactory->hasUserAttended($uID, $concertID)) {
 				$this->model->addToExistingConcert($uID, $concertID);
-				$this->model->hasNewConcertFailed = false;
+				$this->model->hasConcertFailed = false;
 				$this->model->setConcertConfirmationMessage();
 				return (true);
 			} else {
@@ -225,7 +225,7 @@
 				if ($this->model->validationFactory->isLengthStringValid ( $concertName, CONCERT_NAME_MAX_LENGTH ) && $this->model->validationFactory->isLengthStringValid ( $concertVenue, CONCERT_VENUE_MAX_LENGTH ) && $this->model->validationFactory->isDateValid($concertDate)) {
 					$this->model->editConcert($concertName, $concertVenue, $concertDate , $CID);
 					$this->model->editButtonPressed = false;
-					$this->model->hasNewConcertFailed = false;
+					$this->model->hasEditConcertFailed = false;
 					$this->model->setEditConcertConfirmationMessage ();
 					return (true);
 				} else
@@ -233,8 +233,9 @@
 			} else
 				$this->model->editConcertError(NEW_USER_FORM_ERRORS_COMPULSORY_STR);
 
-			$this->model->hasNewConcertFailed = true;
-			$this->model->setConcertConfirmationMessage ();
+			$this->model->hasEditConcertFailed = true;
+			$this->model->editButtonPressed = false;
+			$this->model->setEditConcertConfirmationMessage ();
 			return (false);
 		}
 

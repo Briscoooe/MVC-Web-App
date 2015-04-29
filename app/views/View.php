@@ -11,6 +11,7 @@ class View {
 		$appName = $this->model->appName;
 		$newUserErrorMessage = $this->model->newUserErrorMessage;
 		$newConcertErrorMessage = $this->model->newConcertErrorMessage;
+		$editConcertErrorMessage = $this->model->editConcertErrorMessage;
 		
 		$loginBox = "";
 		$authenticationErrorMessage = "";
@@ -113,10 +114,23 @@ class View {
 					<input type="hidden" id="cID" name="cID" value="' . $cID . '"/>
 					<button type="submit" class="btn btn-danger">Delete from my list</button>
 				</form>';
-				$middleBox = $editConcertForm;
+				if (! isset ( $this->model->hasEditConcertFailed )) {
+					$middleBox = $editConcertForm;
+				} else if ($this->model->hasEditConcertFailed) {
+					$middleBox = $editConcertErrorMessage . $editConcertForm;
+				} else if ($this->model->hasEditConcertFailed == false){
+					$middleBox = $editConcertForm;
+				}
+				
 			} else if ($this->model->editButtonPressed == false) {
-				$confirmationMessage = "<div class='alert alert-success'>" . $this->model->editConcertConfirmation . "</div>";
-				$middleBox = $confirmationMessage . $usersConcertslist;
+				if (! isset ( $this->model->hasEditConcertFailed )) {
+					$middleBox = $editConcertForm;
+				} else if ($this->model->hasEditConcertFailed) {
+					$middleBox = $editConcertErrorMessage . $usersConcertslist;
+				} else if ($this->model->hasEditConcertFailed == false){
+					$confirmationMessage = "<div class='alert alert-success'>" . $this->model->editConcertConfirmation . "</div>";
+					$middleBox = $confirmationMessage . $usersConcertslist;
+				}
 			}
 			
 		} 
